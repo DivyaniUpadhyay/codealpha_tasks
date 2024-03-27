@@ -1,19 +1,31 @@
 import java.util.Scanner;
 
-public class WCC {
+public class WordCount {
 
-  public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    System.out.println("Enter a sentence: ");
-    String sentence = scanner.nextLine();
+        System.out.println("Enter a paragraph: ");
+        String paragraph = scanner.nextLine();
+         int wordCount = countWordsLoop(paragraph);
 
-    // Split the sentence into words using whitespace as delimiters
-    String[] words = sentence.split("\\s+");
+        System.out.println("Number of words: " + wordCount);
+    }
 
-    // Count the number of words
-    int wordCount = words.length;
+    //  Using a loop 
+    public static int countWordsLoop(String paragraph) {
+        int count = 0;
+        boolean inWord = false;
 
-    System.out.println("The sentence has " + wordCount + " words.");
-  }
+        for (char ch : paragraph.toCharArray()) {
+            if (Character.isWhitespace(ch)) {
+                inWord = false;
+            } else if (!inWord) {
+                count++;
+                inWord = true;
+            }
+        }
+
+        return count;
+    }
 }
